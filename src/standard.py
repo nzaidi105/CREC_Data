@@ -16,10 +16,11 @@ if __name__ == '__main__':
     df = pd.read_excel(path_to_file, sheet_name='2012')
     #change code to first 4 characters
     df['Code'] = df['Code'].str[:4]
+    #fixes missing values
+    df.ffill(inplace=True)
     output = os.path.join(standard, file_name)
     #output
     df.to_excel(output)
-    
     print(df.head())
     
 
