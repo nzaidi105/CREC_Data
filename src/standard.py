@@ -5,7 +5,9 @@ import pandas as pd
 
 raw = Path('data/raw')
 
+os.mkdir('data/standard')
 standard = Path('data/standard')
+
 file_name = os.listdir(raw)[1]
 
 path_to_file = os.path.join(raw, file_name)
@@ -32,9 +34,14 @@ if __name__ == '__main__':
     #fixes missing values
     df.ffill(inplace=True)
     output = os.path.join(standard, file_name)
+
+    #group by df
+    group_df = df.groupby('Code').sum()
     
     #output
-    df.to_excel(output)
-    print(df.head())
+    with pd.ExcelWriter(output) as writer:
+        df.to_excel(writer, sheet_name='2012')
+        group_df.to_excel(writer, sheet_name='Groupby Code')
+    
     
 
