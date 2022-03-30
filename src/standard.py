@@ -2,14 +2,17 @@ import os
 from pathlib import Path 
 import pandas as pd
 
-
+#path to raw data
 raw = Path('data/raw')
 
+#creates standard folder for standardized data
 os.mkdir('data/standard')
+#path to standard data
 standard = Path('data/standard')
 
+#name of file
 file_name = os.listdir(raw)[1]
-
+#path to the file
 path_to_file = os.path.join(raw, file_name)
 
 
