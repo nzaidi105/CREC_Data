@@ -12,6 +12,7 @@ standard = Path('data/standard')
 
 #name of file
 file_name = os.listdir(raw)[1]
+
 #path to the file
 path_to_file = os.path.join(raw, file_name)
 
@@ -40,11 +41,21 @@ if __name__ == '__main__':
 
     #group by df
     group_df = df.groupby('Code').sum()
-    
+
+    count = 0
+    commodity_id = []
+    for i in df['Commodity Description']:
+        count +=1
+        commodity_id.append(count)
+
+    commodities = pd.DataFrame({'commodity_id': commodity_id, 'commodity':df['Commodity Description']})
+    commodities.set_index('commodity_id')
+
     #output
     with pd.ExcelWriter(output) as writer:
         df.to_excel(writer, sheet_name='2012')
         group_df.to_excel(writer, sheet_name='Groupby Code')
+        commodities.to_excel(writer, sheet_name='commodities')
     
     
 
