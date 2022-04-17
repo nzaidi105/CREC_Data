@@ -2,6 +2,7 @@ import os
 from pathlib import Path 
 import pandas as pd
 import numpy as np
+from sqlalchemy import true
 
 #path to raw data
 raw = Path('data/raw')
@@ -21,6 +22,14 @@ path_to_file = os.path.join(raw, file_name)
 
 if __name__ == '__main__':
     df = pd.read_excel(path_to_file, sheet_name='2012')
+
+    print(df.shape)
+
+    df['1'] = 0
+    df['2'] = 0
+    df['3'] = 0
+    df['4'] = 0
+
 
     print(df.shape)
 
@@ -72,17 +81,20 @@ if __name__ == '__main__':
             commodity_b_count = 0
             commodity_a_count +=1
 
-    #values_count = 1
-    #while values_count <= len(new_column_names):
-        #values_count +=1
-        #for i in df[new_column_names[values_count]]:
-            #values.append(i)
+    values_count = 1
+    while values_count <= len(new_column_names):
+        values_count +=1
+        try:
+            for i in df[new_column_names[values_count]]:
+                values.append(i)
+        except IndexError:
+            continue
             
 
     print("values:",len(values))
     print("commodity a", len(commodity_id_a))
     print("commodity b", len(commodity_id_b))
-    print(values)
+    #print(values)
 
     commodities_has_commodities = pd.DataFrame({"commodity_a_id":commodity_id_a,
                                                 "commodity_b_id":commodity_id_b})
