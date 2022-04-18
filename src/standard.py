@@ -68,6 +68,7 @@ if __name__ == '__main__':
     commodities.set_index('commodity_id')
 
     #commodities has commodities linking table creation
+
     values = []
     commodity_id_a = []
     commodity_id_b = []
@@ -81,15 +82,17 @@ if __name__ == '__main__':
             commodity_b_count = 0
             commodity_a_count +=1
 
-    values_count = 1
+    values_count = -1
     while values_count <= len(new_column_names):
         values_count +=1
         try:
-            for i in df[new_column_names[values_count]]:
-                values.append(i)
+            for i in range(len(df[new_column_names[values_count]])):
+                values.append(df[new_column_names[values_count]][i])
         except IndexError:
             continue
-            
+
+    #for index, commodity in enumerate(new_column_names):
+        #print(index, commodity)
 
     print("values:",len(values))
     print("commodity a", len(commodity_id_a))
@@ -97,7 +100,8 @@ if __name__ == '__main__':
     #print(values)
 
     commodities_has_commodities = pd.DataFrame({"commodity_a_id":commodity_id_a,
-                                                "commodity_b_id":commodity_id_b})
+                                                "commodity_b_id":commodity_id_b,
+                                                "values":values})
     
 
     
