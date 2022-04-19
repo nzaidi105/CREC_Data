@@ -72,15 +72,15 @@ if __name__ == '__main__':
     values = []
     commodity_id_a = []
     commodity_id_b = []
-    commodity_a_count = 1
-    commodity_b_count = 0
-    while commodity_a_count <= len(commodities):
-        commodity_id_a.append(commodity_a_count)
-        commodity_b_count +=1
+    commodity_a_count = 0
+    commodity_b_count = 1
+    while commodity_b_count <= len(commodities):
         commodity_id_b.append(commodity_b_count)
-        if commodity_b_count == commodity_id[-1]:
-            commodity_b_count = 0
-            commodity_a_count +=1
+        commodity_a_count +=1
+        commodity_id_a.append(commodity_a_count)
+        if commodity_a_count == commodity_id[-1]:
+            commodity_a_count = 0
+            commodity_b_count +=1
 
     values_count = -1
     while values_count <= len(new_column_names):
@@ -102,7 +102,8 @@ if __name__ == '__main__':
     commodities_has_commodities = pd.DataFrame({"commodity_a_id":commodity_id_a,
                                                 "commodity_b_id":commodity_id_b,
                                                 "values":values})
-    
+
+
 
     
     #output
