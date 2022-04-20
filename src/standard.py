@@ -112,9 +112,11 @@ if __name__ == '__main__':
                 "23":"Construction",
                 "33":"Durable Goods",
                 "31":"Nondurable Goods",
+                "32":"Medical",
                 "42":"Wholesale Trade",
                 "44":"Retail Trade",
                 "48":"Transportation",
+                "4B":"Other Retail",
                 "51":"Information",
                 "52":"Finance and Insurance",
                 "53":"Real Estate and Rental Leasing",
@@ -127,7 +129,10 @@ if __name__ == '__main__':
                 "72":"Accomodation and Food Services",
                 "81":"Other Servies, Except Government",
                 "GS":"Goverment",
-                "S0":"Used or Other"}
+                "S0":"Used or Other",
+                "V0":"Compensation",
+                "T0":"Total",
+                }
 
     sector_names = [i for i in sectors_dict.values()]
     sector_codes = [i for i in sectors_dict.keys()]
@@ -138,10 +143,19 @@ if __name__ == '__main__':
        count +=1
 
     sectors = pd.DataFrame({"sector_id":sector_id,
-                            "sector":sector_names}) 
+                            "sector":sector_names,
+                            "sector_codes":sector_codes}) 
 
     #sector_id forign key creation
-    
+    sector_id2 = []
+    for i,code in zip(sectors['sector_id'],sectors['sector_codes']):
+        for c in commodities['code']:
+            if c[:2] == code:
+                sector_id2.append(i)
+
+    print(len(sector_id2))
+    print(len(commodities['commodity_id']))
+    commodities.insert(2, "sector_id", sector_id2, True)
 
     #output
     with pd.ExcelWriter(output) as writer:
