@@ -91,6 +91,7 @@ if __name__ == '__main__':
         except IndexError:
             continue
 
+
     #for index, commodity in enumerate(new_column_names):
         #print(index, commodity)
 
@@ -103,15 +104,52 @@ if __name__ == '__main__':
                                                 "commodity_b_id":commodity_id_b,
                                                 "values":values})
 
+    #sectors table creation
+    sectors_dict = {
+                "11":'Agriculture',
+                "21":"Mining",
+                "22":"Utilities",
+                "23":"Construction",
+                "33":"Durable Goods",
+                "31":"Nondurable Goods",
+                "42":"Wholesale Trade",
+                "44":"Retail Trade",
+                "48":"Transportation",
+                "51":"Information",
+                "52":"Finance and Insurance",
+                "53":"Real Estate and Rental Leasing",
+                "54":"Professional and Technical Services",
+                "55":"Managment of Companies and Entreprises",
+                "56":"Administration and Water Services",
+                "61":"Educational Services",
+                "62":"Health Care and Social Assistance",
+                "71":"Arts, Entertainment, and Recreation",
+                "72":"Accomodation and Food Services",
+                "81":"Other Servies, Except Government",
+                "GS":"Goverment",
+                "S0":"Used or Other"}
 
+    sector_names = [i for i in sectors_dict.values()]
+    sector_codes = [i for i in sectors_dict.keys()]
+    count = 1
+    sector_id = []
+    while count <= len(sector_names):
+       sector_id.append(count)
+       count +=1
 
+    sectors = pd.DataFrame({"sector_id":sector_id,
+                            "sector":sector_names}) 
+
+    #sector_id forign key creation
     
+
     #output
     with pd.ExcelWriter(output) as writer:
         df.to_excel(writer, sheet_name='2012')
         group_df.to_excel(writer, sheet_name='Groupby Code')
         commodities.to_excel(writer, sheet_name='commodities')
         commodities_has_commodities.to_excel(writer, sheet_name='commodities_has_commodities')
+        sectors.to_excel(writer, sheet_name="sectors")
     
     
 
