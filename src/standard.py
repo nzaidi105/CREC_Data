@@ -47,10 +47,12 @@ if __name__ == '__main__':
         des_counter +=1
 
     #change code to first 4 characters
+    
+    df['Code'] = df['Code'].apply(lambda x: str(x))
     df['Code'] = df['Code'].str[:4]
-
+    
     #fixes missing values
-    df.ffill(inplace=True)
+    #df.ffill(inplace=True)
     output = os.path.join(standard, file_name)
 
     #group by df
@@ -115,6 +117,8 @@ if __name__ == '__main__':
                 "32":"Medical",
                 "42":"Wholesale Trade",
                 "44":"Retail Trade",
+                "45": "General Merchandise",
+                "49": "Couriers and Messengers",
                 "48":"Transportation",
                 "4B":"Other Retail",
                 "51":"Information",
@@ -152,6 +156,7 @@ if __name__ == '__main__':
         for c in commodities['code']:
             if c[:2] == code:
                 sector_id2.append(i)
+        
 
     print(len(sector_id2))
     print(len(commodities['commodity_id']))
