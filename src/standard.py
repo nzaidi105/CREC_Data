@@ -13,7 +13,7 @@ os.mkdir('data/standard')
 standard = Path('data/standard')
 
 #name of file
-file_name = os.listdir(raw)[1]
+file_name = os.listdir(raw)[0]
 
 #path to the file
 path_to_file = os.path.join(raw, file_name)
