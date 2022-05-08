@@ -114,7 +114,7 @@ if __name__ == '__main__':
                 "23":"Construction",
                 "33":"Durable Goods",
                 "31":"Nondurable Goods",
-                "32":"Medical",
+                "32":"Wood, Nonmetallic, Mineral, Paper, Printing, Petroleum, and Coal products and Basic Chemical Manufacturing",
                 "42":"Wholesale Trade",
                 "44":"Retail Trade",
                 "45": "General Merchandise",
