@@ -7,4 +7,4 @@ How to prepare data:
 5) remove the first two rows of the dataset you want to standardize so they column names should start with "Code".
 6) Run the script
 7) The input the following commands: `git add .` `git commit -m 'commit message'` `git push origin branch_name`
-8) Go to github forked github repository and download standard data from standard folder
+8) Go to forked github repository and download standard data from standard folder
